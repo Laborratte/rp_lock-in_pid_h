@@ -1,6 +1,8 @@
 
 # Devbuild  changes
 
+unreleased
+- ADDED chaining of PIDs
 
 v0.3.1
 - FIXED bug on PID derivative constant label

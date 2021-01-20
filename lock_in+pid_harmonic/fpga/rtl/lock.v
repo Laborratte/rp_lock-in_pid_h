@@ -842,15 +842,15 @@ module lock(
 
     muxer4  #(.RES(14)) i_muxer5_pidA (
         // input
-        .sel  ( pidA_sw ), // select cable
+        .sel   ( pidA_sw ), // select cable
         .in0   ( error          ),
         .in1   ( Xo             ),        .in2   ( Yo             ),
         .in3   ( F1o            ),        .in4   ( F2o            ),        .in5   ( F3o            ),
         .in6   ( signal_i       ),        .in7   ( ramp_A         ),
         .in8   ( in1_m_in2[14-1:0] ),     .in9   ( in1            ),        .in10  (  in2           ),
         .in11  ( aux_A          ),        .in12  ( aux_B          ),
-        .in13  ( cos_ref         ),       .in14  ( sin_ref        ),
-        .in15  ( 14'b0         ),
+        .in13  ( cos_ref        ),        .in14  ( sin_ref        ),
+        .in15  ( pid_B_out      ),
         // output
         .out ( pidA_in  )
     );
@@ -886,15 +886,15 @@ module lock(
 
     muxer4  #(.RES(14)) i_muxer5_pidB (
         // input
-        .sel  ( pidB_sw ), // select cable
+        .sel   ( pidB_sw ), // select cable
         .in0   ( error          ),
         .in1   ( Xo             ),        .in2   ( Yo             ),
         .in3   ( F1o            ),        .in4   ( F2o            ),        .in5   ( F3o            ),
         .in6   ( signal_i       ),        .in7   ( ramp_A         ),
         .in8   ( in1_m_in2[14-1:0] ),     .in9   ( in1            ),        .in10  (  in2           ),
         .in11  ( aux_A          ),        .in12  ( aux_B          ),
-        .in13  ( cos_ref         ),       .in14  ( sin_ref        ),
-        .in15  ( 14'b0         ),
+        .in13  ( cos_ref        ),        .in14  ( sin_ref        ),
+        .in15  ( pid_A_out      ),
         // output
         .out ( pidB_in  )
     );
