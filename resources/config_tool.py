@@ -33,7 +33,7 @@ import enum
 from datetime import datetime
 
 
-PWD = os.environ['PWD']
+PWD = os.getcwd()
 
 if PWD.find('rp_lock-in_pid_h')>0:
     folder = PWD[:PWD.find('rp_lock-in_pid_h')+len('rp_lock-in_pid_h')]
@@ -507,8 +507,7 @@ def update_verilog(filename,dock,txt):
                         out=''
                 if out=='':
                     output.write(line)
-    tnow=datetime.now().strftime("%Y%m%d_%H%M%S")
-    os.rename(filename,filename.replace('.v','_'+tnow+'.v'))
+    os.remove(filename)
     os.rename(filename.replace('.v','_.v'),filename)
 
 
@@ -1065,12 +1064,8 @@ def update_main(filename,dock,txt):
                         out=''
                 if out=='':
                     output.write(line)
-    tnow=datetime.now().strftime("%Y%m%d_%H%M%S")
-    tmp=filename.split('.')
-    tmp[-2]+='_'+tnow
-    fn3='.'.join(tmp)
 
-    os.rename(fn1,fn3)
+    os.remove(fn1)
     os.rename(fn2,fn1)
 
 def replace_pattern(filename,pattern,txt):
@@ -1097,12 +1092,8 @@ def replace_pattern(filename,pattern,txt):
                         break
                 if out:
                     output.write(line)
-    tnow=datetime.now().strftime("%Y%m%d_%H%M%S_p")
-    tmp=filename.split('.')
-    tmp[-2]+='_'+tnow
-    fn3='.'.join(tmp)
 
-    os.rename(fn1,fn3)
+    os.remove(fn1)
     os.rename(fn2,fn1)
 
 
@@ -1978,12 +1969,7 @@ def update_html(filename,h):
                 elif bool(re.match(out,line)):
                     out=''
 
-    tnow=datetime.now().strftime("%Y%m%d_%H%M%S")
-    tmp=filename.split('.')
-    tmp[-2]+='_'+tnow
-    fn3='.'.join(tmp)
-
-    os.rename(fn1,fn3)
+    os.remove(fn1)
     os.rename(fn2,fn1)
 
 
@@ -2033,12 +2019,7 @@ def update_py(filename,h):
                 elif bool(re.match(out,line)):
                     out=''
 
-    tnow=datetime.now().strftime("%Y%m%d_%H%M%S")
-    tmp=filename.split('.')
-    tmp[-2]+='_'+tnow
-    fn3='.'.join(tmp)
-
-    os.rename(fn1,fn3)
+    os.remove(fn1)
     os.rename(fn2,fn1)
 
 
