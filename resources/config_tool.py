@@ -246,6 +246,7 @@ f.add( name="pidA_sp"            , group=grp , val=    0, rw=True ,  nbits=14, m
 f.add( name="pidA_kp"            , group=grp , val=    0, rw=True ,  nbits=14, min_val=      -8192, max_val=       8191, fpga_update=True , signed=True , desc="pidA proportional constant" )
 f.add( name="pidA_ki"            , group=grp , val=    0, rw=True ,  nbits=14, min_val=      -8192, max_val=       8191, fpga_update=True , signed=True , desc="pidA integral constant" )
 f.add( name="pidA_kd"            , group=grp , val=    0, rw=True ,  nbits=14, min_val=      -8192, max_val=       8191, fpga_update=True , signed=True , desc="pidA derivative constant" )
+f.add( name="pidA_rst_val"       , group=grp , val=    0, rw=True ,  nbits=14, min_val=      -8192, max_val=       8191, fpga_update=True , signed=True , desc="pidA integrator reset value" )
 f.add( name="pidA_in"            , group=grp , val=    0, rw=False,  nbits=14, min_val=      -8192, max_val=       8191, fpga_update=True , signed=True , desc="pidA input" )
 f.add( name="pidA_out"           , group=grp , val=    0, rw=False,  nbits=14, min_val=      -8192, max_val=       8191, fpga_update=True , signed=True , desc="pidA output" )
 f.add( name="pidA_ctrl"          , group=grp , val=    0, rw=True ,  nbits= 3, min_val=          0, max_val=          7, fpga_update=True , signed=False, desc="pidA control: [ pidA_ifreeze: integrator freeze , pidA_freeze: output freeze , pidA_irst:integrator reset]" )
@@ -261,6 +262,7 @@ f.add( name="pidB_sp"            , group=grp , val=    0, rw=True ,  nbits=14, m
 f.add( name="pidB_kp"            , group=grp , val=    0, rw=True ,  nbits=14, min_val=      -8192, max_val=       8191, fpga_update=True , signed=True , desc="pidB proportional constant" )
 f.add( name="pidB_ki"            , group=grp , val=    0, rw=True ,  nbits=14, min_val=      -8192, max_val=       8191, fpga_update=True , signed=True , desc="pidB integral constant" )
 f.add( name="pidB_kd"            , group=grp , val=    0, rw=True ,  nbits=14, min_val=      -8192, max_val=       8191, fpga_update=True , signed=True , desc="pidB derivative constant" )
+f.add( name="pidB_rst_val"       , group=grp , val=    0, rw=True ,  nbits=14, min_val=      -8192, max_val=       8191, fpga_update=True , signed=True , desc="pidB integrator reset value" )
 f.add( name="pidB_in"            , group=grp , val=    0, rw=False,  nbits=14, min_val=      -8192, max_val=       8191, fpga_update=True , signed=True , desc="pidB input" )
 f.add( name="pidB_out"           , group=grp , val=    0, rw=False,  nbits=14, min_val=      -8192, max_val=       8191, fpga_update=True , signed=True , desc="pidB output" )
 f.add( name="pidB_ctrl"          , group=grp , val=    0, rw=True ,  nbits= 3, min_val=          0, max_val=          7, fpga_update=True , signed=False, desc="pidB control: [ pidB_ifreeze: integrator freeze , pidB_freeze: output freeze , pidB_irst:integrator reset]" )
@@ -812,6 +814,7 @@ m.add( name="lock_pidA_sp"       , fpga_reg="pidA_sp"       , val=0    , rw=True
 m.add( name="lock_pidA_kp"       , fpga_reg="pidA_kp"       , val=0    , rw=True , nbits=14, min_val=-8192     , max_val=8191      , fpga_update=True , signed=True , group="pidA"           , desc="pidA proportional constant")
 m.add( name="lock_pidA_ki"       , fpga_reg="pidA_ki"       , val=0    , rw=True , nbits=14, min_val=-8192     , max_val=8191      , fpga_update=True , signed=True , group="pidA"           , desc="pidA integral constant")
 m.add( name="lock_pidA_kd"       , fpga_reg="pidA_kd"       , val=0    , rw=True , nbits=14, min_val=-8192     , max_val=8191      , fpga_update=True , signed=True , group="pidA"           , desc="pidA derivative constant")
+m.add( name="lock_pidA_rst_val"  , fpga_reg="pidA_rst_val"  , val=0    , rw=True , nbits=14, min_val=-8192     , max_val=8191      , fpga_update=True , signed=True , group="pidB"           , desc="pidA integrator reset value")
 m.add( name="lock_pidA_in"       , fpga_reg="pidA_in"       , val=0    , rw=False, nbits=14, min_val=-8192     , max_val=8191      , fpga_update=False, signed=True , group="pidA"           , desc="pidA input")
 m.add( name="lock_pidA_out"      , fpga_reg="pidA_out"      , val=0    , rw=False, nbits=14, min_val=-8192     , max_val=8191      , fpga_update=False, signed=True , group="pidA"           , desc="pidA output")
 
@@ -836,6 +839,7 @@ m.add( name="lock_pidB_sp"       , fpga_reg="pidB_sp"       , val=0    , rw=True
 m.add( name="lock_pidB_kp"       , fpga_reg="pidB_kp"       , val=0    , rw=True , nbits=14, min_val=-8192     , max_val=8191      , fpga_update=True , signed=True , group="pidB"           , desc="pidB proportional constant")
 m.add( name="lock_pidB_ki"       , fpga_reg="pidB_ki"       , val=0    , rw=True , nbits=14, min_val=-8192     , max_val=8191      , fpga_update=True , signed=True , group="pidB"           , desc="pidB integral constant")
 m.add( name="lock_pidB_kd"       , fpga_reg="pidB_kd"       , val=0    , rw=True , nbits=14, min_val=-8192     , max_val=8191      , fpga_update=True , signed=True , group="pidB"           , desc="pidB derivative constant")
+m.add( name="lock_pidB_rst_val"  , fpga_reg="pidB_rst_val"  , val=0    , rw=True , nbits=14, min_val=-8192     , max_val=8191      , fpga_update=True , signed=True , group="pidB"           , desc="pidB integrator reset value")
 m.add( name="lock_pidB_in"       , fpga_reg="pidB_in"       , val=0    , rw=False, nbits=14, min_val=-8192     , max_val=8191      , fpga_update=False, signed=True , group="pidB"           , desc="pidB input")
 m.add( name="lock_pidB_out"      , fpga_reg="pidB_out"      , val=0    , rw=False, nbits=14, min_val=-8192     , max_val=8191      , fpga_update=False, signed=True , group="pidB"           , desc="pidB output")
 
@@ -1305,6 +1309,7 @@ h['lock_pidA_sp'                  ].type = 'number'
 h['lock_pidA_kp'                  ].type = 'number'
 h['lock_pidA_ki'                  ].type = 'number'
 h['lock_pidA_kd'                  ].type = 'number'
+h['lock_pidA_rst_val'             ].type = 'number'
 if True:
     h['lock_pidA_irst'                ].type = 'checkbox'
     h['lock_pidA_freeze'              ].type = 'checkbox'
@@ -1319,6 +1324,7 @@ h['lock_pidB_sp'                  ].type = 'number'
 h['lock_pidB_kp'                  ].type = 'number'
 h['lock_pidB_ki'                  ].type = 'number'
 h['lock_pidB_kd'                  ].type = 'number'
+h['lock_pidB_rst_val'             ].type = 'number'
 if True:
     h['lock_pidB_irst'                ].type = 'checkbox'
     h['lock_pidB_freeze'              ].type = 'checkbox'

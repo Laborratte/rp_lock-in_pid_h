@@ -118,12 +118,12 @@
                        'lock_lpf_F2_order,lock_lpf_F3_tau,lock_lpf_F3_order,lock_error_sw,lock_error_offset,lock_mod_out1,lock_mod_out2,'+
                        'lock_gen_mod_phase,lock_gen_mod_hp,lock_ramp_step,lock_ramp_low_lim,lock_ramp_hig_lim,lock_ramp_reset,lock_ramp_enable,'+
                        'lock_ramp_direction,lock_ramp_sawtooth,lock_ramp_B_factor,lock_read_ctrl,lock_pidA_sw,lock_pidA_PSR,lock_pidA_ISR,'+
-                       'lock_pidA_DSR,lock_pidA_SAT,lock_pidA_sp,lock_pidA_kp,lock_pidA_ki,lock_pidA_kd,lock_pidA_irst,lock_pidA_freeze,'+
-                       'lock_pidA_ifreeze,lock_pidB_sw,lock_pidB_PSR,lock_pidB_ISR,lock_pidB_DSR,lock_pidB_SAT,lock_pidB_sp,lock_pidB_kp,'+
-                       'lock_pidB_ki,lock_pidB_kd,lock_pidB_irst,lock_pidB_freeze,lock_pidB_ifreeze,lock_aux_A,lock_aux_B,lock_ctrl_aux_lock_now,'+
-                       'lock_ctrl_aux_launch_lock_trig,lock_ctrl_aux_pidB_enable_ctrl,lock_ctrl_aux_pidA_enable_ctrl,lock_ctrl_aux_ramp_enable_ctrl,'+
-                       'lock_ctrl_aux_set_pidB_enable,lock_ctrl_aux_set_pidA_enable,lock_ctrl_aux_set_ramp_enable,lock_ctrl_aux_trig_type,'+
-                       'lock_ctrl_aux_lock_trig_rise,lock_mod_harmonic_on';
+                       'lock_pidA_DSR,lock_pidA_SAT,lock_pidA_sp,lock_pidA_kp,lock_pidA_ki,lock_pidA_kd,lock_pidA_rst_val,lock_pidA_irst,'+
+                       'lock_pidA_freeze,lock_pidA_ifreeze,lock_pidB_sw,lock_pidB_PSR,lock_pidB_ISR,lock_pidB_DSR,lock_pidB_SAT,lock_pidB_sp,'+
+                       'lock_pidB_kp,lock_pidB_ki,lock_pidB_kd,lock_pidB_rst_val,lock_pidB_irst,lock_pidB_freeze,lock_pidB_ifreeze,lock_aux_A,'+
+                       'lock_aux_B,lock_ctrl_aux_lock_now,lock_ctrl_aux_launch_lock_trig,lock_ctrl_aux_pidB_enable_ctrl,lock_ctrl_aux_pidA_enable_ctrl,'+
+                       'lock_ctrl_aux_ramp_enable_ctrl,lock_ctrl_aux_set_pidB_enable,lock_ctrl_aux_set_pidA_enable,lock_ctrl_aux_set_ramp_enable,'+
+                       'lock_ctrl_aux_trig_type,lock_ctrl_aux_lock_trig_rise,lock_mod_harmonic_on';
 
   config_params_keys = config_params_txts.split(",");
 
@@ -1155,10 +1155,11 @@
     // [LOLO DOCK PAGELOAD]
 
     // Number inputs
-    var input_number=['lock_lock_trig_val','lock_lock_trig_time_val','lock_rl_error_threshold','lock_rl_signal_threshold','lock_sf_jumpA',
-                      'lock_sf_jumpB','lock_error_offset','lock_mod_out1','lock_mod_out2','lock_gen_mod_phase','lock_gen_mod_hp','lock_ramp_step',
-                      'lock_ramp_low_lim','lock_ramp_hig_lim','lock_ramp_B_factor','lock_pidA_sp','lock_pidA_kp','lock_pidA_ki','lock_pidA_kd',
-                      'lock_pidB_sp','lock_pidB_kp','lock_pidB_ki','lock_pidB_kd','lock_aux_A','lock_aux_B'];
+    var input_number=['lock_lock_trig_val','lock_lock_trig_time_val','lock_rl_error_threshold','lock_rl_signal_threshold','lock_sf_jumpA', 
+                      'lock_sf_jumpB','lock_error_offset','lock_mod_out1','lock_mod_out2','lock_gen_mod_phase','lock_gen_mod_hp','lock_ramp_step', 
+                      'lock_ramp_low_lim','lock_ramp_hig_lim','lock_ramp_B_factor','lock_pidA_sp','lock_pidA_kp','lock_pidA_ki','lock_pidA_kd', 
+                      'lock_pidA_rst_val','lock_pidB_sp','lock_pidB_kp','lock_pidB_ki','lock_pidB_kd','lock_pidB_rst_val','lock_aux_A', 
+                      'lock_aux_B'];
 
     for(ii in input_number){
       $('#'+input_number[ii])
@@ -1297,11 +1298,11 @@
         //$(this).blur();
     });
 
-    $('#lock_pidA_sp,#lock_pidA_kp,#lock_pidA_ki,#lock_pidA_kd').on('input', function() {
+    $('#lock_pidA_sp,#lock_pidA_kp,#lock_pidA_ki,#lock_pidA_kd,#lock_pidA_rst_val').on('input', function() {
         lock_pidA_update();
         //$(this).blur();
     });
-    $('#lock_pidB_sp,#lock_pidB_kp,#lock_pidB_ki,#lock_pidB_kd').on('input', function() {
+    $('#lock_pidB_sp,#lock_pidB_kp,#lock_pidB_ki,#lock_pidB_kd,#lock_pidB_rst_val').on('input', function() {
         lock_pidB_update();
         //$(this).blur();
     });
@@ -1682,12 +1683,14 @@
     lock_pidA_kp_arr = $("#lock_pidA_kp" ).val().trim().split(' ').filter( function(n,i){ return n!=="" } );
     lock_pidA_ki_arr = $("#lock_pidA_ki" ).val().trim().split(' ').filter( function(n,i){ return n!=="" } );
     lock_pidA_kd_arr = $("#lock_pidA_kd" ).val().trim().split(' ').filter( function(n,i){ return n!=="" } );
+    lock_pidA_rst_val_arr = $("#lock_pidA_rst_val" ).val().trim().split(' ').filter( function(n,i){ return n!=="" } );
 
     // Check if inputs are numbers
     if( !$.isNumeric(lock_pidA_sp_arr[0]) ||
         !$.isNumeric(lock_pidA_kp_arr[0]) ||
         !$.isNumeric(lock_pidA_ki_arr[0]) ||
-        !$.isNumeric(lock_pidA_kd_arr[0])    ) return -1 ;
+        !$.isNumeric(lock_pidA_kd_arr[0]) ||
+        !$.isNumeric(lock_pidA_rst_val_arr[0]) ) return -1 ;
 
     // Check if values changed from last execution. We don't want to update DIVs constantly but only
     // when there are changes (to save processor time / resources)
@@ -1696,6 +1699,7 @@
         parseInt(lock_pidA_kp_arr[0])         == pidA_kp &&
         parseInt(lock_pidA_ki_arr[0])         == pidA_ki &&
         parseInt(lock_pidA_kd_arr[0])         == pidA_kd &&
+        parseInt(lock_pidA_rst_val_arr[0])    == pidA_rst_val &&
         parseInt(params.local.lock_pidA_PSR ) == parseInt($("#lock_pidA_PSR" ).val()) &&
         parseInt(params.local.lock_pidA_ISR ) == parseInt($("#lock_pidA_ISR" ).val()) &&
         parseInt(params.local.lock_pidA_DSR ) == parseInt($("#lock_pidA_DSR" ).val()) &&
@@ -1707,6 +1711,7 @@
     pidA_kp = parseInt( lock_pidA_kp_arr[0] ) ;
     pidA_ki = parseInt( lock_pidA_ki_arr[0] ) ;
     pidA_kd = parseInt( lock_pidA_kd_arr[0] ) ;
+    pidA_rst_val = parseInt( lock_pidA_rst_val_arr[0] ) ;
 
     // If there is a text that sets units, process the correct unit and number value
     if( lock_pidA_sp_arr.length === 2) {
@@ -1717,6 +1722,17 @@
       pidA_sp = Math.min(  8191 , pidA_sp  ) ;
       pidA_sp = Math.max( -8192 , pidA_sp  ) ;
       $("#lock_pidA_sp").val(""+pidA_sp);
+    }
+
+    // If there is a text that sets units, process the correct unit and number value
+    if( lock_pidA_rst_val_arr.length === 2) {
+      if ( lock_pidA_rst_val_arr[1].toLowerCase()=="v" )
+        pidA_rst_val = Math.round( pidA_rst_val * 8192 );
+      if ( lock_pidA_rst_val_arr[1].toLowerCase()=="mv" )
+        pidA_rst_val = Math.round( pidA_rst_val * 8192 /1000 );
+      pidA_rst_val = Math.min(  8191 , pidA_rst_val  ) ;
+      pidA_rst_val = Math.max( -8192 , pidA_rst_val  ) ;
+      $("#lock_pidA_rst_val").val(""+pidA_rst_val);
     }
 
     // Update text labels with correct info values
@@ -1781,6 +1797,10 @@
     setpoint=Math.round(pidA_sp / 8191*1000*100 )/100 ;
     $('#lock_pidA_sp_text').html( "<small><b>"+setpoint.toFixed(2)+"&nbsp;mV</b></small>"   );
 
+    // integrator reset value
+    intRstVal=Math.round(pidA_rst_val / 8191*1000*100 )/100 ;
+    $('#lock_pidA_rst_val_text').html( "<small><b>"+setpoint.toFixed(2)+"&nbsp;mV</b></small>"   );
+
   }
 
   function lock_pidB_update(){
@@ -1789,12 +1809,14 @@
     lock_pidB_kp_arr = $("#lock_pidB_kp" ).val().trim().split(' ').filter( function(n,i){ return n!=="" } );
     lock_pidB_ki_arr = $("#lock_pidB_ki" ).val().trim().split(' ').filter( function(n,i){ return n!=="" } );
     lock_pidB_kd_arr = $("#lock_pidB_kd" ).val().trim().split(' ').filter( function(n,i){ return n!=="" } );
+    lock_pidB_rst_val_arr = $("#lock_pidB_rst_val" ).val().trim().split(' ').filter( function(n,i){ return n!=="" } );
 
     // Check if inputs are numbers
     if( !$.isNumeric(lock_pidB_sp_arr[0]) ||
         !$.isNumeric(lock_pidB_kp_arr[0]) ||
         !$.isNumeric(lock_pidB_ki_arr[0]) ||
-        !$.isNumeric(lock_pidB_kd_arr[0])    ) return -1 ;
+        !$.isNumeric(lock_pidB_kd_arr[0]) ||
+        !$.isNumeric(lock_pidB_rst_val_arr[0]) ) return -1 ;
 
     // Check if values changed from last execution. We don't want to update DIVs constantly but only
     // when there are changes (to save processor time / resources)
@@ -1803,6 +1825,7 @@
         parseInt(lock_pidB_kp_arr[0])         == pidB_kp &&
         parseInt(lock_pidB_ki_arr[0])         == pidB_ki &&
         parseInt(lock_pidB_kd_arr[0])         == pidB_kd &&
+        parseInt(lock_pidB_rst_val_arr[0])    == pidB_rst_val &&
         parseInt(params.local.lock_pidB_PSR ) == parseInt($("#lock_pidB_PSR" ).val()) &&
         parseInt(params.local.lock_pidB_ISR ) == parseInt($("#lock_pidB_ISR" ).val()) &&
         parseInt(params.local.lock_pidB_DSR ) == parseInt($("#lock_pidB_DSR" ).val()) &&
@@ -1814,6 +1837,7 @@
     pidB_kp = parseInt( lock_pidB_kp_arr[0] ) ;
     pidB_ki = parseInt( lock_pidB_ki_arr[0] ) ;
     pidB_kd = parseInt( lock_pidB_kd_arr[0] ) ;
+    pidB_rst_val = parseInt( lock_pidB_rst_val_arr[0] ) ;
 
     // If there is a text that sets units, process the correct unit and number value
     if( lock_pidB_sp_arr.length === 2) {
@@ -1824,6 +1848,17 @@
       pidB_sp = Math.min(  8191 , pidB_sp  ) ;
       pidB_sp = Math.max( -8192 , pidB_sp  ) ;
       $("#lock_pidB_sp").val(""+pidB_sp);
+    }
+
+    // If there is a text that sets units, process the correct unit and number value
+    if( lock_pidB_rst_val_arr.length === 2) {
+      if ( lock_pidB_rst_val_arr[1].toLowerCase()=="v" )
+        pidB_rst_val = Math.round( pidB_rst_val * 8192 );
+      if ( lock_pidB_rst_val_arr[1].toLowerCase()=="mv" )
+        pidB_rst_val = Math.round( pidB_rst_val * 8192 /1000 );
+      pidB_rst_val = Math.min(  8191 , pidB_rst_val  ) ;
+      pidB_rst_val = Math.max( -8192 , pidB_rst_val  ) ;
+      $("#lock_pidB_rst_val").val(""+pidB_rst_val);
     }
 
     // Update text labels with correct info values
@@ -1887,6 +1922,10 @@
     // set - point
     setpoint=Math.round(pidB_sp / 8191*1000*100 )/100 ;
     $('#lock_pidB_sp_text').html( "<small><b>"+setpoint.toFixed(2)+"&nbsp;mV</b></small>"   );
+
+    // integrator reset value
+    intRstVal=Math.round(pidB_rst_val / 8191*1000*100 )/100 ;
+    $('#lock_pidB_rst_val_text').html( "<small><b>"+setpoint.toFixed(2)+"&nbsp;mV</b></small>"   );
 
   }
 
@@ -2803,7 +2842,7 @@
     $('#lock_ctrl_aux_set_pidA_enable').prop('checked', (params.original.lock_ctrl_aux_set_pidA_enable    ? true : false));
     $('#lock_ctrl_aux_set_ramp_enable').prop('checked', (params.original.lock_ctrl_aux_set_ramp_enable    ? true : false));
     $('#lock_ctrl_aux_lock_trig_rise' ).prop('checked', (params.original.lock_ctrl_aux_lock_trig_rise     ? true : false));
-
+    
     // Numbers
     $('#lock_lock_trig_val'      ).val(params.original.lock_lock_trig_val         );
     $('#lock_lock_trig_time_val' ).val(params.original.lock_lock_trig_time_val    );
@@ -2824,13 +2863,15 @@
     $('#lock_pidA_kp'            ).val(params.original.lock_pidA_kp               );
     $('#lock_pidA_ki'            ).val(params.original.lock_pidA_ki               );
     $('#lock_pidA_kd'            ).val(params.original.lock_pidA_kd               );
+    $('#lock_pidA_rst_val'       ).val(params.original.lock_pidA_rst_val          );
     $('#lock_pidB_sp'            ).val(params.original.lock_pidB_sp               );
     $('#lock_pidB_kp'            ).val(params.original.lock_pidB_kp               );
     $('#lock_pidB_ki'            ).val(params.original.lock_pidB_ki               );
     $('#lock_pidB_kd'            ).val(params.original.lock_pidB_kd               );
+    $('#lock_pidB_rst_val'       ).val(params.original.lock_pidB_rst_val          );
     $('#lock_aux_A'              ).val(params.original.lock_aux_A                 );
     $('#lock_aux_B'              ).val(params.original.lock_aux_B                 );
-
+    
     // Switches
     $('#lock_oscA_sw'           ).val(params.original.lock_oscA_sw              );
     $('#lock_oscB_sw'           ).val(params.original.lock_oscB_sw              );
@@ -2865,7 +2906,7 @@
     $('#lock_pidB_DSR'          ).val(params.original.lock_pidB_DSR             );
     $('#lock_pidB_SAT'          ).val(params.original.lock_pidB_SAT             );
     $('#lock_ctrl_aux_trig_type').val(params.original.lock_ctrl_aux_trig_type   );
-
+    
     // Buttons
     if (params.original.lock_osc_raw_mode){                 // lock_osc_raw_mode
       $('#lock_osc_raw_mode').removeClass('btn-default').addClass('btn-primary').data('checked',true);
@@ -2912,7 +2953,7 @@
     }else{
       $('#lock_mod_harmonic_on').removeClass('btn-primary').addClass('btn-default').data('checked',false);
     }
-
+    
     // [LOLO DOCK LOADPARAMS END]
 
 
@@ -5216,6 +5257,28 @@
                       </div>
                     </div>
 
+                    <div class="row collapse"  data-tag="PidAOptions"> <!-- offset control -->
+                      <div class="panel-group col-xs-12 col-sm-5 col-md-5">
+                        <form class="form-horizontal" role="form" onsubmit="return false;">
+                          <div class="form-group">
+                            <div class="col-xs-12 col-sm-12">
+                              <input type="number" autocomplete="off" class="form-control" value="0" id="lock_pidA_rst_val" step="1" min="-8192" max="8191">
+                              <span style="display: none;" class="input-group-btn" id="lock_pidA_rst_val_apply">
+                                <button type="button" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-ok-circle"></span></button>
+                              </span>
+                            </div>
+
+                          </div>
+                        </form>
+                      </div>
+                      <div class="panel-group col-xs-12 col-sm-2 col-md-2">
+                        <div style="padding: 7px 0 0;" class="col-xs-12"><small><b>int rst val:</b></small></div>
+                      </div>
+                      <div class="panel-group col-xs-12 col-sm-5 col-md-5 text-center">
+                        <div style="padding: 7px 0 0;" class="col-xs-12" id="lock_pidA_ofs_text">lock_pidA_rst_val</div>
+                      </div>
+                    </div>
+
                     <!--hr style="margin: 7px 7px"-->
 
                     <div style="border-style: solid; border-color: #FF9999;">
@@ -5479,6 +5542,28 @@
                       </div>
                       <div class="panel-group col-xs-12 col-sm-5 col-md-5 text-center">
                         <div style="padding: 7px 0 0;" class="col-xs-12" id="lock_pidB_sp_text">lock_pidB_sp</div>
+                      </div>
+                    </div>
+
+                    <div class="row collapse"  data-tag="PidBOptions"> <!-- offset control -->
+                      <div class="panel-group col-xs-12 col-sm-5 col-md-5">
+                        <form class="form-horizontal" role="form" onsubmit="return false;">
+                          <div class="form-group">
+                            <div class="col-xs-12 col-sm-12">
+                              <input type="number" autocomplete="off" class="form-control" value="0" id="lock_pidB_rst_val" step="1" min="-8192" max="8191">
+                              <span style="display: none;" class="input-group-btn" id="lock_pidB_rst_val_apply">
+                                <button type="button" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-ok-circle"></span></button>
+                              </span>
+                            </div>
+
+                          </div>
+                        </form>
+                      </div>
+                      <div class="panel-group col-xs-12 col-sm-2 col-md-2">
+                        <div style="padding: 7px 0 0;" class="col-xs-12"><small><b>int rst val:</b></small></div>
+                      </div>
+                      <div class="panel-group col-xs-12 col-sm-5 col-md-5 text-center">
+                        <div style="padding: 7px 0 0;" class="col-xs-12" id="lock_pidB_ofs_text">lock_pidB_rst_val</div>
                       </div>
                     </div>
 

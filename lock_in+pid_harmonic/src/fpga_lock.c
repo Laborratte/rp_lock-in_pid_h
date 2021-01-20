@@ -153,6 +153,7 @@ void reset_locks(void)
         g_lock_reg->pidA_kp              =      0;
         g_lock_reg->pidA_ki              =      0;
         g_lock_reg->pidA_kd              =      0;
+        g_lock_reg->pidA_rst_val         =      0;
         g_lock_reg->pidA_in              =      0;
         g_lock_reg->pidA_out             =      0;
         g_lock_reg->pidA_ctrl            =      0;
@@ -166,6 +167,7 @@ void reset_locks(void)
         g_lock_reg->pidB_kp              =      0;
         g_lock_reg->pidB_ki              =      0;
         g_lock_reg->pidB_kd              =      0;
+        g_lock_reg->pidB_rst_val         =      0;
         g_lock_reg->pidB_in              =      0;
         g_lock_reg->pidB_out             =      0;
         g_lock_reg->pidB_ctrl            =      0;

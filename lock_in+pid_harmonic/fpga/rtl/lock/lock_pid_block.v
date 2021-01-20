@@ -64,6 +64,7 @@ module lock_pid_block
    input signed   [ 14-1: 0] set_kp_i        ,  // Kp
    input signed   [ 14-1: 0] set_ki_i        ,  // Ki
    input signed   [ 14-1: 0] set_kd_i        ,  // Kd
+   input signed   [ 14-1: 0] int_rst_val     ,  // integrator reset value
    input                     int_rst_i          // integrator reset
 );
 
@@ -177,8 +178,22 @@ always @(posedge clk_i) begin
 
       if (int_rst_i)
          begin
-            int_reg     <= 63'h0; // reset
-            int_shr_reg <= 63'h0; // reset
+            // reset
+            int_reg     <= 63'h0;
+            case (ISR)
+               4'd0     : int_reg <= { 49{int_rst_val[14-1]} , int_rst_val[14-1:0]        };
+               4'd1     : int_reg <= { 46{int_rst_val[14-1]} , int_rst_val[14-1:0],  3'b0 };
+               4'd2     : int_reg <= { 43{int_rst_val[14-1]} , int_rst_val[14-1:0],  6'b0 };
+               4'd3     : int_reg <= { 39{int_rst_val[14-1]} , int_rst_val[14-1:0], 10'b0 };
+               4'd4     : int_reg <= { 36{int_rst_val[14-1]} , int_rst_val[14-1:0], 13'b0 };
+               4'd5     : int_reg <= { 33{int_rst_val[14-1]} , int_rst_val[14-1:0], 16'b0 };
+               4'd6     : int_reg <= { 29{int_rst_val[14-1]} , int_rst_val[14-1:0], 20'b0 };
+               4'd7     : int_reg <= { 26{int_rst_val[14-1]} , int_rst_val[14-1:0], 23'b0 };
+               4'd8     : int_reg <= { 23{int_rst_val[14-1]} , int_rst_val[14-1:0], 26'b0 };
+               4'd9     : int_reg <= { 19{int_rst_val[14-1]} , int_rst_val[14-1:0], 30'b0 };
+               default  : int_reg <= { 49{int_rst_val[14-1]} , int_rst_val[14-1:0]        };
+            endcase
+            int_shr_reg <= { 49{int_rst_val[14-1]} , int_rst_val[14-1:0] };
             sat_int     <=  8'b0;
          end
       else
