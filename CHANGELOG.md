@@ -1,6 +1,8 @@
 
 # Devbuild  changes
 
+unreleased
+- ADDED custom PID integrator reset value
 
 v0.3.1
 - FIXED bug on PID derivative constant label
