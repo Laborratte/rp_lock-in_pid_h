@@ -850,7 +850,7 @@ module lock(
         .in8   ( in1_m_in2[14-1:0] ),     .in9   ( in1            ),        .in10  (  in2           ),
         .in11  ( aux_A          ),        .in12  ( aux_B          ),
         .in13  ( cos_ref        ),        .in14  ( sin_ref        ),
-        .in15  ( pid_B_out      ),
+        .in15  ( pidB_out       ),
         // output
         .out ( pidA_in  )
     );
@@ -894,7 +894,7 @@ module lock(
         .in8   ( in1_m_in2[14-1:0] ),     .in9   ( in1            ),        .in10  (  in2           ),
         .in11  ( aux_A          ),        .in12  ( aux_B          ),
         .in13  ( cos_ref        ),        .in14  ( sin_ref        ),
-        .in15  ( pid_A_out      ),
+        .in15  ( pidA_out       ),
         // output
         .out ( pidB_in  )
     );
