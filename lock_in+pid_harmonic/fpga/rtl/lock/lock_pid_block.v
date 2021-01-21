@@ -176,10 +176,23 @@ always @(posedge clk_i) begin
       else
          ki_mult <= $signed(error) * $signed(set_ki_i) ;
 
+         case (ISR)
+            4'd0     : sat_int <= sat_i[8-1:0]+ 5'd0  ;
+            4'd1     : sat_int <= sat_i[8-1:0]+ 5'd3  ;
+            4'd2     : sat_int <= sat_i[8-1:0]+ 5'd6  ;
+            4'd3     : sat_int <= sat_i[8-1:0]+ 5'd10 ;
+            4'd4     : sat_int <= sat_i[8-1:0]+ 5'd13 ;
+            4'd5     : sat_int <= sat_i[8-1:0]+ 5'd16 ;
+            4'd6     : sat_int <= sat_i[8-1:0]+ 5'd20 ;
+            4'd7     : sat_int <= sat_i[8-1:0]+ 5'd23 ;
+            4'd8     : sat_int <= sat_i[8-1:0]+ 5'd26 ;
+            4'd9     : sat_int <= sat_i[8-1:0]+ 5'd30 ;
+            default  : sat_int <= sat_i[8-1:0]+ 5'd0  ;
+         endcase
+
       if (int_rst_i)
          begin
             // reset
-            int_reg     <= 63'h0;
             case (ISR)
                4'd0     : int_reg <= { {49{int_rst_val[14-1]}} , int_rst_val[14-1:0]         };
                4'd1     : int_reg <= { {46{int_rst_val[14-1]}} , int_rst_val[14-1:0] ,  3'b0 };
@@ -194,23 +207,22 @@ always @(posedge clk_i) begin
                default  : int_reg <= { {49{int_rst_val[14-1]}} , int_rst_val[14-1:0]         };
             endcase
             int_shr_reg <= { {49{int_rst_val[14-1]}} , int_rst_val[14-1:0] };
-            sat_int     <=  8'b0;
          end
       else
          begin
             int_reg     <= int_sum_sat[63-1: 0];
             case (ISR)
-               4'd0     : begin int_shr_reg <= int_sum_sat[63-1: 0];                               sat_int <= sat_i[8-1:0]+ 5'd0  ;        end
-               4'd1     : begin int_shr_reg <= {  {3{int_sum_sat[63-1]}} , int_sum_sat[63-1:3] };  sat_int <= sat_i[8-1:0]+ 5'd3  ;        end
-               4'd2     : begin int_shr_reg <= {  {6{int_sum_sat[63-1]}} , int_sum_sat[63-1:6] };  sat_int <= sat_i[8-1:0]+ 5'd6  ;        end
-               4'd3     : begin int_shr_reg <= { {10{int_sum_sat[63-1]}} , int_sum_sat[63-1:10]};  sat_int <= sat_i[8-1:0]+ 5'd10 ;        end
-               4'd4     : begin int_shr_reg <= { {13{int_sum_sat[63-1]}} , int_sum_sat[63-1:13]};  sat_int <= sat_i[8-1:0]+ 5'd13 ;        end
-               4'd5     : begin int_shr_reg <= { {16{int_sum_sat[63-1]}} , int_sum_sat[63-1:16]};  sat_int <= sat_i[8-1:0]+ 5'd16 ;        end
-               4'd6     : begin int_shr_reg <= { {20{int_sum_sat[63-1]}} , int_sum_sat[63-1:20]};  sat_int <= sat_i[8-1:0]+ 5'd20 ;        end
-               4'd7     : begin int_shr_reg <= { {23{int_sum_sat[63-1]}} , int_sum_sat[63-1:23]};  sat_int <= sat_i[8-1:0]+ 5'd23 ;        end
-               4'd8     : begin int_shr_reg <= { {26{int_sum_sat[63-1]}} , int_sum_sat[63-1:26]};  sat_int <= sat_i[8-1:0]+ 5'd26 ;        end
-               4'd9     : begin int_shr_reg <= { {30{int_sum_sat[63-1]}} , int_sum_sat[63-1:30]};  sat_int <= sat_i[8-1:0]+ 5'd30 ;        end
-               default  : begin int_shr_reg <= int_sum_sat[63-1: 0] ;                              sat_int <= sat_i[8-1:0]+ 5'd0  ;        end
+               4'd0     : int_shr_reg <=                             int_sum_sat[63-1:0]  ;
+               4'd1     : int_shr_reg <= {  {3{int_sum_sat[63-1]}} , int_sum_sat[63-1:3] };
+               4'd2     : int_shr_reg <= {  {6{int_sum_sat[63-1]}} , int_sum_sat[63-1:6] };
+               4'd3     : int_shr_reg <= { {10{int_sum_sat[63-1]}} , int_sum_sat[63-1:10]};
+               4'd4     : int_shr_reg <= { {13{int_sum_sat[63-1]}} , int_sum_sat[63-1:13]};
+               4'd5     : int_shr_reg <= { {16{int_sum_sat[63-1]}} , int_sum_sat[63-1:16]};
+               4'd6     : int_shr_reg <= { {20{int_sum_sat[63-1]}} , int_sum_sat[63-1:20]};
+               4'd7     : int_shr_reg <= { {23{int_sum_sat[63-1]}} , int_sum_sat[63-1:23]};
+               4'd8     : int_shr_reg <= { {26{int_sum_sat[63-1]}} , int_sum_sat[63-1:26]};
+               4'd9     : int_shr_reg <= { {30{int_sum_sat[63-1]}} , int_sum_sat[63-1:30]};
+               default  : int_shr_reg <=                             int_sum_sat[63-1:0]  ;
             endcase
          end
    end
