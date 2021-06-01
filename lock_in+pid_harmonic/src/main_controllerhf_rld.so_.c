@@ -301,7 +301,7 @@ static rp_app_params_t rp_main_params[PARAMS_NUM+1] = {
     /*********************************************/
 
     // [MAINDEF DOCK]
-
+    
     { "lock_oscA_sw"                  ,      1, 1, 0,            0,           31 }, /** switch for muxer oscA **/
     { "lock_oscB_sw"                  ,      2, 1, 0,            0,           31 }, /** switch for muxer oscB **/
     { "lock_osc1_filt_off"            ,      1, 1, 0,            0,            1 }, /** oscilloscope control osc1_filt_off **/
@@ -391,6 +391,7 @@ static rp_app_params_t rp_main_params[PARAMS_NUM+1] = {
     { "lock_pidA_kp"                  ,      0, 1, 0,        -8192,         8191 }, /** pidA proportional constant **/
     { "lock_pidA_ki"                  ,      0, 1, 0,        -8192,         8191 }, /** pidA integral constant **/
     { "lock_pidA_kd"                  ,      0, 1, 0,        -8192,         8191 }, /** pidA derivative constant **/
+    { "lock_pidA_rst_val"             ,      0, 1, 0,        -8192,         8191 }, /** pidA integrator reset value **/
     { "lock_pidA_in"                  ,      0, 0, 1,        -8192,         8191 }, /** pidA input **/
     { "lock_pidA_out"                 ,      0, 0, 1,        -8192,         8191 }, /** pidA output **/
     { "lock_pidA_irst"                ,      0, 1, 0,            0,            1 }, /** pidA_irst **/
@@ -406,6 +407,7 @@ static rp_app_params_t rp_main_params[PARAMS_NUM+1] = {
     { "lock_pidB_kp"                  ,      0, 1, 0,        -8192,         8191 }, /** pidB proportional constant **/
     { "lock_pidB_ki"                  ,      0, 1, 0,        -8192,         8191 }, /** pidB integral constant **/
     { "lock_pidB_kd"                  ,      0, 1, 0,        -8192,         8191 }, /** pidB derivative constant **/
+    { "lock_pidB_rst_val"             ,      0, 1, 0,        -8192,         8191 }, /** pidB integrator reset value **/
     { "lock_pidB_in"                  ,      0, 0, 1,        -8192,         8191 }, /** pidB input **/
     { "lock_pidB_out"                 ,      0, 0, 1,        -8192,         8191 }, /** pidB output **/
     { "lock_pidB_irst"                ,      0, 1, 0,            0,            1 }, /** pidB_irst **/
@@ -425,7 +427,7 @@ static rp_app_params_t rp_main_params[PARAMS_NUM+1] = {
     { "lock_ctrl_aux_trig_type"       ,      0, 0, 0,            0,            3 }, /** todo **/
     { "lock_ctrl_aux_lock_trig_rise"  ,      0, 0, 0,            0,            1 }, /** todo **/
     { "lock_mod_harmonic_on"          ,      1, 0, 0,            0,            1 }, /** todo **/
-
+    
     // [MAINDEF DOCK END]
 
     { /* Must be last! */
