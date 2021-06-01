@@ -384,7 +384,7 @@ static rp_app_params_t rp_main_params[PARAMS_NUM+1] = {
     { "lock_read_ctrl"                ,      0, 1, 0,            0,            7 }, /** [unused,start_clk,Freeze] **/
     { "lock_pidA_sw"                  ,      0, 1, 0,            0,           31 }, /** switch selector for pidA input **/
     { "lock_pidA_PSR"                 ,      3, 1, 0,            0,            4 }, /** pidA PSR **/
-    { "lock_pidA_ISR"                 ,      8, 1, 0,            0,            9 }, /** pidA ISR **/
+    { "lock_pidA_ISR"                 ,      8, 1, 0,            0,           12 }, /** pidA ISR **/
     { "lock_pidA_DSR"                 ,      0, 1, 0,            0,            5 }, /** pidA DSR **/
     { "lock_pidA_SAT"                 ,     13, 1, 0,            0,           13 }, /** pidA saturation control **/
     { "lock_pidA_sp"                  ,      0, 1, 0,        -8192,         8191 }, /** pidA set_point **/
@@ -400,7 +400,7 @@ static rp_app_params_t rp_main_params[PARAMS_NUM+1] = {
     { "lock_ctrl_A"                   ,      0, 0, 1,        -8192,         8191 }, /** control_A: pidA_out + ramp_A **/
     { "lock_pidB_sw"                  ,      0, 1, 0,            0,           31 }, /** switch selector for pidB input **/
     { "lock_pidB_PSR"                 ,      3, 1, 0,            0,            4 }, /** pidB PSR **/
-    { "lock_pidB_ISR"                 ,      8, 1, 0,            0,            9 }, /** pidB ISR **/
+    { "lock_pidB_ISR"                 ,      8, 1, 0,            0,           12 }, /** pidB ISR **/
     { "lock_pidB_DSR"                 ,      0, 1, 0,            0,            5 }, /** pidB DSR **/
     { "lock_pidB_SAT"                 ,     13, 1, 0,            0,           13 }, /** pidB saturation control **/
     { "lock_pidB_sp"                  ,      0, 1, 0,        -8192,         8191 }, /** pidB set_point **/
