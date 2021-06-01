@@ -807,7 +807,7 @@ m.add( name="lock_read_ctrl"     , fpga_reg="read_ctrl"     , val=0    , rw=True
 # group: pidA
 m.add( name="lock_pidA_sw"       , fpga_reg="pidA_sw"       , val=0    , rw=True , nbits=5 , min_val=0         , max_val=31        , fpga_update=True , signed=False, group="pidA"           , desc="switch selector for pidA input")
 m.add( name="lock_pidA_PSR"      , fpga_reg="pidA_PSR"      , val=3    , rw=True , nbits=3 , min_val=0         , max_val=4         , fpga_update=True , signed=False, group="pidA"           , desc="pidA PSR")
-m.add( name="lock_pidA_ISR"      , fpga_reg="pidA_ISR"      , val=8    , rw=True , nbits=4 , min_val=0         , max_val=9         , fpga_update=True , signed=False, group="pidA"           , desc="pidA ISR")
+m.add( name="lock_pidA_ISR"      , fpga_reg="pidA_ISR"      , val=8    , rw=True , nbits=4 , min_val=0         , max_val=12        , fpga_update=True , signed=False, group="pidA"           , desc="pidA ISR")
 m.add( name="lock_pidA_DSR"      , fpga_reg="pidA_DSR"      , val=0    , rw=True , nbits=3 , min_val=0         , max_val=5         , fpga_update=True , signed=False, group="pidA"           , desc="pidA DSR")
 m.add( name="lock_pidA_SAT"      , fpga_reg="pidA_SAT"      , val=13   , rw=True , nbits=14, min_val=0         , max_val=13        , fpga_update=True , signed=False, group="pidA"           , desc="pidA saturation control")
 m.add( name="lock_pidA_sp"       , fpga_reg="pidA_sp"       , val=0    , rw=True , nbits=14, min_val=-8192     , max_val=8191      , fpga_update=True , signed=True , group="pidA"           , desc="pidA set_point")
@@ -832,7 +832,7 @@ m.add( name="lock_ctrl_A"        , fpga_reg="ctrl_A"        , val=0    , rw=Fals
 # group: pidB
 m.add( name="lock_pidB_sw"       , fpga_reg="pidB_sw"       , val=0    , rw=True , nbits=5 , min_val=0         , max_val=31        , fpga_update=True , signed=False, group="pidB"           , desc="switch selector for pidB input")
 m.add( name="lock_pidB_PSR"      , fpga_reg="pidB_PSR"      , val=3    , rw=True , nbits=3 , min_val=0         , max_val=4         , fpga_update=True , signed=False, group="pidB"           , desc="pidB PSR")
-m.add( name="lock_pidB_ISR"      , fpga_reg="pidB_ISR"      , val=8    , rw=True , nbits=4 , min_val=0         , max_val=9         , fpga_update=True , signed=False, group="pidB"           , desc="pidB ISR")
+m.add( name="lock_pidB_ISR"      , fpga_reg="pidB_ISR"      , val=8    , rw=True , nbits=4 , min_val=0         , max_val=12        , fpga_update=True , signed=False, group="pidB"           , desc="pidB ISR")
 m.add( name="lock_pidB_DSR"      , fpga_reg="pidB_DSR"      , val=0    , rw=True , nbits=3 , min_val=0         , max_val=5         , fpga_update=True , signed=False, group="pidB"           , desc="pidB DSR")
 m.add( name="lock_pidB_SAT"      , fpga_reg="pidB_SAT"      , val=13   , rw=True , nbits=14, min_val=0         , max_val=13        , fpga_update=True , signed=False, group="pidB"           , desc="pidB saturation control")
 m.add( name="lock_pidB_sp"       , fpga_reg="pidB_sp"       , val=0    , rw=True , nbits=14, min_val=-8192     , max_val=8191      , fpga_update=True , signed=True , group="pidB"           , desc="pidB set_point")
