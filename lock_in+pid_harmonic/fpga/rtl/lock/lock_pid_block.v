@@ -177,20 +177,20 @@ always @(posedge clk_i) begin
          ki_mult <= $signed(error) * $signed(set_ki_i) ;
 
          case (ISR)
-            4'd0     : sat_int <= sat_i[8-1:0]+ 5'd0  ;
-            4'd1     : sat_int <= sat_i[8-1:0]+ 5'd3  ;
-            4'd2     : sat_int <= sat_i[8-1:0]+ 5'd6  ;
-            4'd3     : sat_int <= sat_i[8-1:0]+ 5'd10 ;
-            4'd4     : sat_int <= sat_i[8-1:0]+ 5'd13 ;
-            4'd5     : sat_int <= sat_i[8-1:0]+ 5'd16 ;
-            4'd6     : sat_int <= sat_i[8-1:0]+ 5'd20 ;
-            4'd7     : sat_int <= sat_i[8-1:0]+ 5'd23 ;
-            4'd8     : sat_int <= sat_i[8-1:0]+ 5'd26 ;
-            4'd9     : sat_int <= sat_i[8-1:0]+ 5'd30 ;
-            4'd10    : sat_int <= sat_i[8-1:0]+ 5'd33 ;
-            4'd11    : sat_int <= sat_i[8-1:0]+ 5'd36 ;
-            4'd12    : sat_int <= sat_i[8-1:0]+ 5'd39 ;
-            default  : sat_int <= sat_i[8-1:0]+ 5'd0  ;
+            4'd0     : sat_int <= sat_i[8-1:0]+ 8'd0  ;
+            4'd1     : sat_int <= sat_i[8-1:0]+ 8'd3  ;
+            4'd2     : sat_int <= sat_i[8-1:0]+ 8'd6  ;
+            4'd3     : sat_int <= sat_i[8-1:0]+ 8'd10 ;
+            4'd4     : sat_int <= sat_i[8-1:0]+ 8'd13 ;
+            4'd5     : sat_int <= sat_i[8-1:0]+ 8'd16 ;
+            4'd6     : sat_int <= sat_i[8-1:0]+ 8'd20 ;
+            4'd7     : sat_int <= sat_i[8-1:0]+ 8'd23 ;
+            4'd8     : sat_int <= sat_i[8-1:0]+ 8'd26 ;
+            4'd9     : sat_int <= sat_i[8-1:0]+ 8'd30 ;
+            4'd10    : sat_int <= sat_i[8-1:0]+ 8'd33 ;
+            4'd11    : sat_int <= sat_i[8-1:0]+ 8'd36 ;
+            4'd12    : sat_int <= sat_i[8-1:0]+ 8'd39 ;
+            default  : sat_int <= sat_i[8-1:0]+ 8'd0  ;
          endcase
 
       if (int_rst_i)
