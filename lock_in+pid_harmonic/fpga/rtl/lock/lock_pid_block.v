@@ -187,6 +187,9 @@ always @(posedge clk_i) begin
             4'd7     : sat_int <= sat_i[8-1:0]+ 5'd23 ;
             4'd8     : sat_int <= sat_i[8-1:0]+ 5'd26 ;
             4'd9     : sat_int <= sat_i[8-1:0]+ 5'd30 ;
+            4'd10    : sat_int <= sat_i[8-1:0]+ 5'd33 ;
+            4'd11    : sat_int <= sat_i[8-1:0]+ 5'd36 ;
+            4'd12    : sat_int <= sat_i[8-1:0]+ 5'd39 ;
             default  : sat_int <= sat_i[8-1:0]+ 5'd0  ;
          endcase
 
@@ -204,6 +207,9 @@ always @(posedge clk_i) begin
                4'd7     : int_reg <= { {26{int_rst_val[14-1]}} , int_rst_val[14-1:0] , 23'b0 };
                4'd8     : int_reg <= { {23{int_rst_val[14-1]}} , int_rst_val[14-1:0] , 26'b0 };
                4'd9     : int_reg <= { {19{int_rst_val[14-1]}} , int_rst_val[14-1:0] , 30'b0 };
+               4'd10    : int_reg <= { {16{int_rst_val[14-1]}} , int_rst_val[14-1:0] , 33'b0 };
+               4'd11    : int_reg <= { {13{int_rst_val[14-1]}} , int_rst_val[14-1:0] , 36'b0 };
+               4'd12    : int_reg <= { {10{int_rst_val[14-1]}} , int_rst_val[14-1:0] , 39'b0 };
                default  : int_reg <= { {49{int_rst_val[14-1]}} , int_rst_val[14-1:0]         };
             endcase
             int_shr_reg <= { {49{int_rst_val[14-1]}} , int_rst_val[14-1:0] };
@@ -222,6 +228,9 @@ always @(posedge clk_i) begin
                4'd7     : int_shr_reg <= { {23{int_sum_sat[63-1]}} , int_sum_sat[63-1:23]};
                4'd8     : int_shr_reg <= { {26{int_sum_sat[63-1]}} , int_sum_sat[63-1:26]};
                4'd9     : int_shr_reg <= { {30{int_sum_sat[63-1]}} , int_sum_sat[63-1:30]};
+               4'd10    : int_shr_reg <= { {33{int_sum_sat[63-1]}} , int_sum_sat[63-1:33]};
+               4'd11    : int_shr_reg <= { {36{int_sum_sat[63-1]}} , int_sum_sat[63-1:36]};
+               4'd12    : int_shr_reg <= { {39{int_sum_sat[63-1]}} , int_sum_sat[63-1:39]};
                default  : int_shr_reg <=                             int_sum_sat[63-1:0]  ;
             endcase
          end

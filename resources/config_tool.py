@@ -239,7 +239,7 @@ f.add( name="read_ctrl"          , group=grp , val=    0, rw=True ,  nbits= 3, m
 grp='pidA'
 f.add( name="pidA_sw"            , group=grp , val=    0, rw=True ,  nbits= 5, min_val=          0, max_val=         31, fpga_update=True , signed=False, desc="switch selector for pidA input" )
 f.add( name="pidA_PSR"           , group=grp , val=    3, rw=True ,  nbits= 3, min_val=          0, max_val=          4, fpga_update=True , signed=False, desc="pidA PSR" )
-f.add( name="pidA_ISR"           , group=grp , val=    8, rw=True ,  nbits= 4, min_val=          0, max_val=          9, fpga_update=True , signed=False, desc="pidA ISR" )
+f.add( name="pidA_ISR"           , group=grp , val=    8, rw=True ,  nbits= 4, min_val=          0, max_val=         12, fpga_update=True , signed=False, desc="pidA ISR" )
 f.add( name="pidA_DSR"           , group=grp , val=    0, rw=True ,  nbits= 3, min_val=          0, max_val=          5, fpga_update=True , signed=False, desc="pidA DSR" )
 f.add( name="pidA_SAT"           , group=grp , val=   13, rw=True ,  nbits=14, min_val=          0, max_val=         13, fpga_update=True , signed=False, desc="pidA saturation control" )
 f.add( name="pidA_sp"            , group=grp , val=    0, rw=True ,  nbits=14, min_val=      -8192, max_val=       8191, fpga_update=True , signed=True , desc="pidA set_point" )
@@ -255,7 +255,7 @@ f.add( name="ctrl_A"             , group=grp , val=    0, rw=False,  nbits=14, m
 grp='pidB'
 f.add( name="pidB_sw"            , group=grp , val=    0, rw=True ,  nbits= 5, min_val=          0, max_val=         31, fpga_update=True , signed=False, desc="switch selector for pidB input" )
 f.add( name="pidB_PSR"           , group=grp , val=    3, rw=True ,  nbits= 3, min_val=          0, max_val=          4, fpga_update=True , signed=False, desc="pidB PSR" )
-f.add( name="pidB_ISR"           , group=grp , val=    8, rw=True ,  nbits= 4, min_val=          0, max_val=          9, fpga_update=True , signed=False, desc="pidB ISR" )
+f.add( name="pidB_ISR"           , group=grp , val=    8, rw=True ,  nbits= 4, min_val=          0, max_val=         12, fpga_update=True , signed=False, desc="pidB ISR" )
 f.add( name="pidB_DSR"           , group=grp , val=    0, rw=True ,  nbits= 3, min_val=          0, max_val=          5, fpga_update=True , signed=False, desc="pidB DSR" )
 f.add( name="pidB_SAT"           , group=grp , val=   13, rw=True ,  nbits=14, min_val=          0, max_val=         13, fpga_update=True , signed=False, desc="pidB saturation control" )
 f.add( name="pidB_sp"            , group=grp , val=    0, rw=True ,  nbits=14, min_val=      -8192, max_val=       8191, fpga_update=True , signed=True , desc="pidB set_point" )
@@ -1670,12 +1670,12 @@ h["lock_lpf_F2_order"   ].control = select(idd="lock_lpf_F2_order"    ,items=['O
 h["lock_lpf_F3_order"   ].control = select(idd="lock_lpf_F3_order"    ,items=['OFF', '1', '2'])
 
 h["lock_pidA_PSR"].control = select(idd="lock_pidA_PSR",items=['/1','/8','/64','/1024','/4096'])
-h["lock_pidA_ISR"].control = select(idd="lock_pidA_ISR",items=['8 ns','64 ns','512 ns','8 us','6 us','524 us','8 ms','67 ms','537 ms','9 s'])
+h["lock_pidA_ISR"].control = select(idd="lock_pidA_ISR",items=['8 ns','64 ns','512 ns','8.2 us','66 us','524 us','8.4 ms','67 ms','537 ms','8.6 s','1:09 min','9:10 min','1:13 h'])
 h["lock_pidA_DSR"].control = select(idd="lock_pidA_DSR",items=['7.5 ns','60 ns','480 ns','7.68 us','61.44 us','491.5 us'])
 h["lock_pidA_SAT"].control = select(idd="lock_pidA_SAT",items=['&plusmn;122uV','&plusmn;244uV','&plusmn;488uV','&plusmn;977uV','&plusmn;2mV','&plusmn;4mV','&plusmn;8mV','&plusmn;16mV','&plusmn;31mV','&plusmn;62mV','&plusmn;125mV','&plusmn;250mV','&plusmn;500mV','&plusmn;1 V'])
 
 h["lock_pidB_PSR"].control = select(idd="lock_pidB_PSR",items=['/1','/8','/64','/1024','/4096'])
-h["lock_pidB_ISR"].control = select(idd="lock_pidB_ISR",items=['8 ns','64 ns','512 ns','8 us','6 us','524 us','8 ms','67 ms','537 ms','9 s'])
+h["lock_pidB_ISR"].control = select(idd="lock_pidB_ISR",items=['8 ns','64 ns','512 ns','8.2 us','66 us','524 us','8.4 ms','67 ms','537 ms','8.6 s','1:09 min','9:10 min','1:13 h'])
 h["lock_pidB_DSR"].control = select(idd="lock_pidB_DSR",items=['7.5 ns','60 ns','480 ns','7.68 us','61.44 us','491.5 us'])
 h["lock_pidB_SAT"].control = select(idd="lock_pidB_SAT",items=['&plusmn;122uV','&plusmn;244uV','&plusmn;488uV','&plusmn;977uV','&plusmn;2mV','&plusmn;4mV','&plusmn;8mV','&plusmn;16mV','&plusmn;31mV','&plusmn;62mV','&plusmn;125mV','&plusmn;250mV','&plusmn;500mV','&plusmn;1 V'])
 
@@ -1695,8 +1695,8 @@ h['lock_oscB_sw'].control.enable = [True]*25 + [False]*7
 h['lock_pidA_sw'].control.enable = [True]*25 + [False]*7
 h['lock_pidB_sw'].control.enable = [True]*25 + [False]*7
 
-h['lock_pidA_sw'].control.hide = list(range(1,9))+list(range(10,22))
-h['lock_pidB_sw'].control.hide = list(range(1,9))+list(range(10,22))
+h['lock_pidA_sw'].control.hide = list(range(1,9))+list(range(10,15))+list(range(16,22))
+h['lock_pidB_sw'].control.hide = list(range(1,9))+list(range(10,15))+list(range(16,22))
 
 
 h['lock_pidA_sw'].control.hide_group = 'pidA_more'
@@ -2093,7 +2093,7 @@ if False:
 py_global_config.append(
         html_global_config( regex_start = ' *# *\[REGSET DOCK\] *',
                             regex_end   = ' *# *\[REGSET DOCK END\]',
-                            text        = '# [REGSET DOCK]\n'+f.print_hugo(ret=True)+'# [REGSET DOCK END]\n' )
+                            text        = '# [REGSET DOCK]\n'+f.print_hugo(ret=True)+'# [REGSET DOCK END]' )
         )
 
 #os.chdir(folder)

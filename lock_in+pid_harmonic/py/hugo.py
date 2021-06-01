@@ -342,34 +342,6 @@ li.add( fpga_reg(name='aux_A'              , index= 95, rw=True , nbits=14,signe
 li.add( fpga_reg(name='aux_B'              , index= 96, rw=True , nbits=14,signed=True ) )
 # [REGSET DOCK END]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #%%
 
 if __name__ == '__main__':
