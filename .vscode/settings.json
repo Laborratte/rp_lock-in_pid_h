@@ -1,0 +1,5 @@
+{
+    "files.exclude": {
+        "**/*.so_.c": true
+    }
+}
